@@ -9,8 +9,7 @@
 
 package groupProject;
 
-//import javafx.event.ActionEvent;
-//import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,6 +22,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
@@ -116,6 +116,13 @@ public class PatientHistory extends HBox
 		health.setMouseTransparent(true);
 		
 		back.setFont(Font.font(null, BODY_FONT));
+        
+        back.setOnAction(e -> {
+            // Go back to the NurseView scene
+            Stage stage = (Stage) getScene().getWindow();
+            stage.setScene(new Scene(new NurseView(), 800, 400));
+            stage.setTitle("Nurse Portal");
+        });
         
         col2.getChildren().addAll(medLab, med, immLab, immunize, healLab, health, blank2, back);
         

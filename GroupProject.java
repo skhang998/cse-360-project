@@ -90,5 +90,3 @@ public class GroupProject extends Application{
     }
 
 }
-
-

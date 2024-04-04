@@ -82,8 +82,13 @@ public class NurseView extends Application {
         Button historyButton = new Button("History");
         historyButton.setOnAction(e -> {
             // Go back to the PatientHistory scene
-            PatientHistoryID patient = new PatientHistoryID();
+            PatientHistory patient = new PatientHistory();
             patient.start(primaryStage);
+        });
+        Button chatButton = new Button("Patient Chat");
+        chatButton.setOnAction(e -> {
+            NurseChat nurseChat = new NurseChat();
+            nurseChat.start(primaryStage);
         });
        
         Button saveButton = new Button("Save");
@@ -150,6 +155,7 @@ public class NurseView extends Application {
         gridPane.add(exitButton, 0, 9);
         gridPane.add(historyButton, 1, 9);
         gridPane.add(saveButton, 2, 9);
+        gridPane.add(chatButton, 3, 9);
        
         // Setting background
         gridPane.setBackground(bg);

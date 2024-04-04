@@ -61,7 +61,6 @@ public class PatientView extends Application {
         Label patientInfoLabel = new Label("Patient Contact Information");
         patientInfoLabel.setStyle("-fx-font-weight: bold");
         patientInfoLabel.setAlignment(Pos.CENTER);
-       
 
         patientfirstNameField = new TextField();
         patientlastNameField = new TextField();
@@ -134,7 +133,8 @@ public class PatientView extends Application {
         });
         Button contactUs = new Button("Contact Us");
         contactUs.setOnAction(e -> {
-            
+            PatientChat PatientChat = new PatientChat();
+            PatientChat.start(primaryStage);
         });
         Label sentenceLabel = new Label("Looking for previous visits?");
         Label sentenceLabel2 = new Label("Have any inquiries or health related questions?");

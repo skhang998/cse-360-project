@@ -103,6 +103,12 @@ public class DoctorView extends Application  {
             // Save data
             saveData();
         });
+        Button chatButton = new Button("Patient Chat");
+        chatButton.setOnAction(e -> {
+            DoctorChat doctorChat = new DoctorChat();
+            doctorChat.start(primaryStage);
+        });
+        
         saveButton.setPrefWidth(70); // Set preferred width
         saveButton.setPrefHeight(30); // Set preferred height
         setPatientID(patientID);
@@ -162,6 +168,11 @@ public class DoctorView extends Application  {
         purposeOfVisitBox.setSpacing(5); 
 
         gridPane.add(purposeOfVisitBox, 5, 4);
+        
+        chatButton.setPrefWidth(100); // Set preferred width
+        chatButton.setPrefHeight(30); // Set preferred height
+        gridPane.add(chatButton, 6, 11);
+        
         GridPane.setColumnSpan(purposeOfVisitBox, 2);
  // Span 2 columns
         

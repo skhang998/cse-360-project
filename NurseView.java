@@ -82,7 +82,7 @@ public class NurseView extends Application {
         Button historyButton = new Button("History");
         historyButton.setOnAction(e -> {
             // Go back to the PatientHistory scene
-            PatientHistory patient = new PatientHistory();
+            PatientHistoryID patient = new PatientHistoryID();
             patient.start(primaryStage);
         });
         Button chatButton = new Button("Patient Chat");

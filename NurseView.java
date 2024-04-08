@@ -1,5 +1,9 @@
 package groupProject;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +20,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class NurseView extends Application {
@@ -56,6 +61,11 @@ public class NurseView extends Application {
         allergiesArea = new TextArea();
         purposeOfVisitArea = new TextArea();
 
+        healthIssuesArea.setPrefSize(250, 100);
+        allergiesArea = new TextArea();
+        allergiesArea.setPrefSize(250, 100);
+        purposeOfVisitArea = new TextArea();
+        purposeOfVisitArea.setPrefSize(250, 100);
         // Creating labels
         Label patientInfoLabel = new Label("Patient Information");
         patientInfoLabel.setStyle("-fx-font-weight: bold");
@@ -76,6 +86,14 @@ public class NurseView extends Application {
             // Go back to the PatientHistory scene
             PatientHistory patient = new PatientHistory();
             patient.start(primaryStage);
+        });
+            PatientHistoryID patient = new PatientHistoryID();
+            patient.start(primaryStage);
+        });
+        Button chatButton = new Button("Patient Chat");
+        chatButton.setOnAction(e -> {
+            NurseChat nurseChat = new NurseChat();
+            nurseChat.start(primaryStage);
         });
        
         Button saveButton = new Button("Save");
@@ -99,6 +117,23 @@ public class NurseView extends Application {
         gridPane.add(ageField, 1, 2);
         gridPane.add(new Label("Date of Birth:"), 0, 3);
         gridPane.add(dobField, 1, 3);
+        VBox nameBox = new VBox();
+        nameBox.getChildren().addAll(patientInfoLabel,new Label("Name:"), patientNameField);
+        nameBox.setSpacing(5);
+
+        VBox ageBox = new VBox();
+        ageBox.getChildren().addAll(new Label("Age:"), ageField);
+        ageBox.setSpacing(5);
+
+        VBox dobBox = new VBox();
+        dobBox.getChildren().addAll(new Label("Date of Birth:"), dobField);
+        dobBox.setSpacing(5);
+
+        // Add the VBox containers to the GridPane
+        gridPane.add(nameBox, 0, 1);
+        gridPane.add(ageBox, 0, 2);
+        gridPane.add(dobBox, 0, 3);
+
         gridPane.add(vitalsLabel, 1, 4);
         gridPane.add(new Label("Weight:"), 0, 5);
         gridPane.add(weightField, 1, 5);
@@ -116,11 +151,29 @@ public class NurseView extends Application {
         gridPane.add(allergiesArea, 3, 2);
         gridPane.add(new Label("Purpose of Visit:"), 2, 3);
         gridPane.add(purposeOfVisitArea, 3, 3);
+        
+        VBox healthIssuesBox = new VBox();
+        healthIssuesBox.getChildren().addAll(nurseInputLabel, new Label("Health Issues:"), healthIssuesArea);
+        healthIssuesBox.setSpacing(5);
+
+        VBox allergiesBox = new VBox();
+        allergiesBox.getChildren().addAll(new Label("Allergies:"), allergiesArea);
+        allergiesBox.setSpacing(5);
+
+        VBox purposeOfVisitBox = new VBox();
+        purposeOfVisitBox.getChildren().addAll(new Label("Purpose of Visit:"), purposeOfVisitArea);
+        purposeOfVisitBox.setSpacing(5);
+
+        // Add the VBox containers to the GridPane
+        gridPane.add(healthIssuesBox, 2, 1);
+        gridPane.add(allergiesBox, 2, 2);
+        gridPane.add(purposeOfVisitBox, 2, 3);
 
         // Adding buttons to the layout
         gridPane.add(exitButton, 0, 9);
         gridPane.add(historyButton, 1, 9);
         gridPane.add(saveButton, 2, 9);
+        gridPane.add(chatButton, 3, 9);
        
         // Setting background
         gridPane.setBackground(bg);
@@ -133,6 +186,10 @@ public class NurseView extends Application {
     }
 
     private void saveData() {
+        // Generate a random patient ID
+        Random random = new Random();
+        int patientID = random.nextInt(10000); // Adjust the range as needed
+
         // Retrieve and save data
         String patientName = patientNameField.getText();
         String age = ageField.getText();
@@ -159,6 +216,41 @@ public class NurseView extends Application {
         System.out.println("Health Issues: " + healthIssues);
         System.out.println("Allergies: " + allergies);
         System.out.println("Purpose of Visit: " + purposeOfVisit);
+        // Perform saving operation to a text file with patient ID in the file name
+        String fileName = "nurseview_data_" + patientID + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("Patient ID: " + patientID);
+            writer.newLine();
+            writer.write("Patient Data:");
+            writer.newLine();
+            writer.write("Name: " + patientName);
+            writer.newLine();
+            writer.write("Age: " + age);
+            writer.newLine();
+            writer.write("Date of Birth: " + dob);
+            writer.newLine();
+            writer.newLine();
+            writer.write("Vitals:");
+            writer.newLine();
+            writer.write("Weight: " + weight);
+            writer.newLine();
+            writer.write("Height: " + height);
+            writer.newLine();
+            writer.write("Body Temperature: " + bodyTemp);
+            writer.newLine();
+            writer.write("Blood Pressure: " + bloodPressure);
+            writer.newLine();
+            writer.newLine();
+            writer.write("Nurse Input:");
+            writer.newLine();
+            writer.write("Health Issues: " + healthIssues);
+            writer.newLine();
+            writer.write("Allergies: " + allergies);
+            writer.newLine();
+            writer.write("Purpose of Visit: " + purposeOfVisit);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

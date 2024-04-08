@@ -21,9 +21,7 @@ import java.io.IOException;
 
 public class PatientLogin extends Application {
 
-    private TextField patientIDField;
-    private Stage primaryStage;
-    private String patientName;
+
 
     @Override
     public void start(Stage primaryStage) {

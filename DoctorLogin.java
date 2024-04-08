@@ -64,7 +64,7 @@ public class DoctorLogin extends Application {
 
             if (username.equals(hardcodedUsername) && password.equals(hardcodedPassword)) {
                 // If login is successful, navigate to Nurse Portal
-            	DoctorView doctor = new DoctorView();
+            	DoctorPatientID doctor = new DoctorPatientID();
                 doctor.start(primaryStage);
             } else {
                 // If login fails, display an error message (you can modify this part as needed)

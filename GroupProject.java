@@ -1,12 +1,3 @@
-
-/*
- * Team: 		Th 29
- * Class: 		CSE 360 - Th 1:30pm
- * Professor: 	Lynn Robert Carter
- * Term: 		Spring 2024
- * Assignment: 	Group Project
- * Description: Medical Platform
- */
 package groupProject;
 
 import javafx.scene.control.Label;
@@ -99,5 +90,3 @@ public class GroupProject extends Application{
     }
 
 }
-
-

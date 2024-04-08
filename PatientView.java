@@ -61,6 +61,7 @@ public class PatientView extends Application {
         Label patientInfoLabel = new Label("Patient Contact Information");
         patientInfoLabel.setStyle("-fx-font-weight: bold");
         patientInfoLabel.setAlignment(Pos.CENTER);
+       
 
         patientfirstNameField = new TextField();
         patientlastNameField = new TextField();
